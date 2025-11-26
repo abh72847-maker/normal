@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Collection Map — Pune</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><a href="index.html" class="logo">♻</a><div class="brand-text"><div class="title">Recycle Revolution</div><div class="subtitle">Collection Map</div></div></div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="register.html">Register</a>
+      <a href="login.html">Login</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="map.html" class="active">Collection Map</a>
+      <a href="about.html">About</a>
+      <a href="survey.html">Survey</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="register.html">Register</a>
+      <button id="themeToggle5" class="btn ghost">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Collection Points — Pune</h2>
+      <p class="muted-sm">Tap a marker to view details and claim demo credits.</p>
+
+      <div id="map" style="height:560px;margin-top:12px;border-radius:10px;"></div>
+
+      <div style="margin-top:12px" class="panel">
+        <h4>List of centers included</h4>
+        <ul>
+          <li>AISSMS College of Engineering, Pune</li>
+          <li>Pune Railway Station (Pune Junction)</li>
+          <li>Pune District Court</li>
+          <li>Swargate Metro Station, Pune</li>
+          <li>Swargate, Pune</li>
+        </ul>
+        <p class="muted-sm">If the geocoder fails for any place, try again — Nominatim has request limits.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div>© 2025 Plast2Power</div></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function initMapPage(){
+      if(!document.getElementById('map')) return;
+      const map = L.map('map').setView([18.5204,73.8567],12);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+
+      const places = [
+        {name: 'AISSMS College of Engineering, Pune'},
+        {name: 'Pune Railway Station, Pune'},
+        {name: 'Pune District Court, Pune'},
+        {name: 'Swargate Metro Station, Pune'},
+        {name: 'Swargate, Pune'}
+      ];
+
+      async function geocodePlace(query){
+        const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(query);
+        try{
+          const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+          const j = await res.json();
+          if(j && j.length) return { lat: parseFloat(j[0].lat), lon: parseFloat(j[0].lon), name: j[0].display_name };
+          return null;
+        }catch(err){
+          console.error('Geocode error', err);
+          return null;
+        }
+      }
+
+      (async ()=>{
+        for(const p of places){
+          const geo = await geocodePlace(p.name);
+          await new Promise(r=>setTimeout(r, 800));
+          if(!geo){
+            console.warn('Geocode failed for', p.name);
+            continue;
+          }
+          const marker = L.marker([geo.lat, geo.lon]).addTo(map);
+          marker.bindPopup('<strong>' + p.name + '</strong><br/>' + (geo.name || '') + '<br/><button onclick="claimPoint(\''+p.name.replace(/'/g,'')+'\')" class="btn primary" style="margin-top:8px">Claim Credits</button>');
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Volunteer — Plast2Power</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><a href="index.html" class="logo">♻</a><div class="brand-text"><div class="title">Recycle Revolution</div><div class="subtitle">Volunteer</div></div></div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="register.html">Register</a>
+      <a href="login.html">Login</a>
+      <a href="volunteer.html" class="active">Volunteer</a>
+      <a href="map.html">Collection Map</a>
+      <a href="about.html">About</a>
+      <a href="survey.html">Survey</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="register.html">Join</a>
+      <button id="themeToggle4" class="btn ghost">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel form-panel">
+      <h2>Volunteer Registration</h2>
+      <form id="volunteerPageForm">
+        <label>Full name</label><input class="input" id="volName" required />
+        <label>Mobile</label><input class="input" id="volMobile" required />
+        <label>Location (Pune area)</label><input class="input" id="volLoc" required />
+        <button class="btn primary" type="submit">Register as Volunteer</button>
+        <div id="volMsgPage" class="muted-sm"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div>© 2025 Plast2Power</div></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register — Plast2Power</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo">♻</a>
+      <div class="brand-text"><div class="title">Plast2Power</div><div class="subtitle">Pune Pilot</div></div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="register.html" class="active">Register</a>
+      <a href="login.html">Login</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="map.html">Collection Map</a>
+      <a href="about.html">About</a>
+      <a href="survey.html">Survey</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="login.html">Login</a>
+      <button id="themeToggle2" class="btn ghost">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel form-panel">
+      <h2>Create account</h2>
+      <form id="registerPageForm">
+        <label>Full name</label>
+        <input class="input" id="name" required />
+        <label>Email</label>
+        <input class="input" id="email" type="email" required />
+        <label>Mobile</label>
+        <input class="input" id="mobile" />
+        <label>Electricity Consumer No</label>
+        <input class="input" id="consumer" />
+        <label>Password</label>
+        <input class="input" id="password" type="password" required minlength="8" />
+        <div style="height:12px"></div>
+        <button class="btn primary" type="submit">Register (demo)</button>
+        <div id="registerMsg" class="muted-sm"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>© 2025 Plast2Power</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

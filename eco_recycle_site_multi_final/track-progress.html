@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Track Progress — Plast2Power</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo">♻</a>
+      <div class="brand-text"><div class="title">Plast2Power</div><div class="subtitle">Pune Pilot</div></div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="register.html">Register</a>
+      <a href="login.html">Login</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="map.html">Collection Map</a>
+      <a href="about.html">About</a>
+      <a href="survey.html">Survey</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="login.html">Dashboard</a>
+      <button id="themeToggleTP" class="btn ghost">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h1>Your Progress</h1>
+      <p class="muted-sm">See your credits, contribution stats and achievements. (Demo uses localStorage — when connected to backend this will show real account data.)</p>
+
+      <div class="panel" id="dashboardPanel" style="margin-top:12px;">
+        <h3>Account Summary</h3>
+        <p class="muted-sm">User: <span id="dashUser">Not logged in</span></p>
+        <p class="muted-sm">Credits: <strong id="dashCredits">0</strong></p>
+        <div style="margin-top:8px;">
+          <a class="btn primary" id="redeemBtn" href="#">Redeem Credits</a>
+          <a class="btn ghost" id="historyBtn" href="#">View History</a>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:12px;">
+        <h3>Achievements</h3>
+        <div class="achievements-row">
+          <div class="badge">🌱 <div class="badge-label">First Drop</div></div>
+          <div class="badge">♻️ <div class="badge-label">100 kg</div></div>
+          <div class="badge">🏅 <div class="badge-label">Community Hero</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Plast2Power
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // small demo dashboard wiring (localStorage)
+    document.addEventListener('DOMContentLoaded', () => {
+      const session = localStorage.getItem('eco_session');
+      const users = JSON.parse(localStorage.getItem('eco_users') || '{}');
+      if(session && users[session]) {
+        document.getElementById('dashUser').textContent = users[session].name;
+        document.getElementById('dashCredits').textContent = users[session].credits || 0;
+      } else {
+        document.getElementById('dashUser').textContent = 'Guest (please login)';
+      }
+
+      document.getElementById('redeemBtn').addEventListener('click', (e)=> {
+        e.preventDefault();
+        alert('Redeem flow not connected (demo). Connect backend for real redemption.');
+      });
+      document.getElementById('historyBtn').addEventListener('click', (e)=> {
+        e.preventDefault();
+        alert('History view not implemented in demo.');
+      });
+    });
+  </script>
+</body>
+</html>
